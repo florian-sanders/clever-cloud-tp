@@ -1,2 +1,32 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<script lang="ts">
+	import SimpleButton from '$components/atoms/SimpleButton.svelte';
+	import { count } from '$stores';
+</script>
+
+<svelte:head>
+	<title>Clever cloud - Cart</title>
+</svelte:head>
+
+<h1>Buttons</h1>
+
+<SimpleButton
+	action={() => { $count++}}
+	skin="primary"
+	text="Select {$count}"
+/>
+
+<SimpleButton
+	action={() => {
+		// placeholder
+	}}
+	skin="secondary"
+	text="Add to cart"
+/>
+
+<SimpleButton
+	action={() => {
+		// placeholder
+	}}
+	skin="cautionary"
+	text="Remove from cart"
+/>
