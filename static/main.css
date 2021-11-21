@@ -38,6 +38,8 @@
     7.1px 14.3px 18px -1.4px hsl(var(--shadow-primary-color) / 0.30);
   --border-radius: 0.3rem;
   --gutter: 1rem;
+  --generic-outline: dashed 2px var(--primary-color);
+  --generic-outline-offset: 5px;
 }
 
 * {
@@ -60,4 +62,9 @@ h1, h2, h3, h4, h5, h6, p, ul, li {
   grid-template-rows: auto 1fr;
   gap: var(--gutter);
   height: 100vh;
+}
+
+*:focus-visible {
+  outline: var(--generic-outline);
+  outline-offset: var(--generic-outline-offset);
 }
