@@ -28,12 +28,6 @@
 		"allowJs": true,
 		"checkJs": true,
 		"paths": {
-			"$lib": [
-				"src/lib"
-			],
-			"$lib/*": [
-				"src/lib/*"
-			],
 			"$components": [
 				"src/components"
 			],
@@ -45,7 +39,20 @@
 			],
 			"$stores/*": [
 				"src/stores/*"
-			]
+			],
+			"$interfaces": [
+				"src/interfaces"
+			],
+			"$interfaces/*": [
+				"src/interfaces/*"
+			],
+			"$utilities": [
+				"src/utilities"
+			],
+			"$utilities/*": [
+				"src/utilities/*"
+			],
+
 		}
 	},
 	"include": [
