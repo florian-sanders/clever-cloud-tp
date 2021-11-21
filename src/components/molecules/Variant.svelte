@@ -9,6 +9,7 @@
 	@prop {string} name - The variant name
  -->
 <script lang="ts">
+	import { fade } from 'svelte/transition';
 	import type { Variant } from '$interfaces';
 	import { selectedVariant } from '$stores';
 	import SimpleButton from '$components/atoms/SimpleButton.svelte';
@@ -36,6 +37,7 @@
 <div
 	class="variant-card"
 	class:selected={isSelected}
+	transition:fade
 >
 	<div class="variant-header">
 		<img class="variant-logo" src={variant.imgPath} alt="" width="50" />
