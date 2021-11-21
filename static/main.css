@@ -59,7 +59,7 @@ h1, h2, h3, h4, h5, h6, p, ul, li {
 
 #svelte {
   display: grid;
-  grid-template-rows: auto 1fr;
+  grid-template-rows: auto 90vh;
   gap: var(--gutter);
   height: 100vh;
 }

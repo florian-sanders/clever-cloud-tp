@@ -7,6 +7,7 @@
 
 	import { variants, selectedVariant, cartItems, total } from '$stores';
 	import { getFormattedPrice } from '$utilities';
+import Variants from '$components/organisms/Variants.svelte';
 
 	onMount(async () => {
 		try {
@@ -38,7 +39,6 @@
 		}
 	});
 
-	$: displayedVariants = $variants;
 	$: displayedFlavors = $variants.find(
 		(variant) => $selectedVariant?.variantId === variant.id
 	)?.flavors;
@@ -55,16 +55,11 @@
 </header>
 <main>
 	<div class="grid">
-		<div class="grid-column flex-columns">
-			<h2>Select a runtime</h2>
-			<div class="fluid-grid">
-				{#each displayedVariants as variant}
-					<Variant {variant} />
-				{/each}
-			</div>
+		<div class="grid-column">
+			<Variants />
 		</div>
 		<div class="grid-column">
-			<h2>Choose sizes</h2>
+			<h2>Pick runtime instance sizes</h2>
 			{#if $selectedVariant?.variantId}
 				{#each displayedFlavors as flavor}
 					<Flavor {flavor} />
@@ -95,7 +90,7 @@
 	}
 
 	main {
-		height: 80%;
+		height: 100%;
 	}
 	h1 {
 		margin: 0;
@@ -112,16 +107,10 @@
 		height: 100%;
 	}
 
-	.grid-column {
+    .grid-column {
 		height: 100%;
 		padding: 0.5rem 1rem;
 		overflow-y: auto;
-	}
-
-	.fluid-grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-		gap: calc(var(--gutter) * 2);
 	}
 
 	.placeholder {
