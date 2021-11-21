@@ -63,7 +63,6 @@
 	.variant-card {
 		display: flex;
 		flex-flow: column;
-		/* width: clamp(230px, 40%, 230px); */
 		padding-bottom: var(--gutter);
 		border-radius: var(--border-radius);
 		box-shadow: var(--shadow-elevation-low);
