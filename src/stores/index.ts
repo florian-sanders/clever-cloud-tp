@@ -1,6 +1,8 @@
 import { writable, derived } from 'svelte/store';
 import type { CartVariant, Variant, CartItem, SelectedVariant } from '$interfaces';
 
+export const loading = writable(true);
+
 export const variants = writable<Array<Variant>>([]);
 
 export const cartVariants = writable<Array<CartVariant>>([]);

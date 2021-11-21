@@ -5,9 +5,9 @@
 	import Flavor from '$components/molecules/Flavor.svelte';
 	import CartItem from '$components/molecules/CartItem.svelte';
 
-	import { variants, selectedVariant, cartItems, total } from '$stores';
-	import { getFormattedPrice } from '$utilities';
-import Variants from '$components/organisms/Variants.svelte';
+	import { loading, variants, selectedVariant, cartItems, total } from '$stores';
+	import { getFormattedPrice, pluralize } from '$utilities';
+	import Variants from '$components/organisms/Variants.svelte';
 
 	onMount(async () => {
 		try {
@@ -36,6 +36,8 @@ import Variants from '$components/organisms/Variants.svelte';
 				}));
 		} catch (error) {
 			console.log(error);
+		} finally {
+			$loading = false;
 		}
 	});
 
@@ -69,7 +71,7 @@ import Variants from '$components/organisms/Variants.svelte';
 			{/if}
 		</div>
 		<div class="grid-column">
-			<h2>{cartItemsCount} {cartItemsCount > 1 ? 'products' : 'product'}</h2>
+			<h2>{cartItemsCount} {pluralize(cartItemsCount, 'product')}</h2>
 			{#if $cartItems.length}
 				{#each $cartItems as cartItem}
 					<CartItem {cartItem} />
@@ -83,6 +85,9 @@ import Variants from '$components/organisms/Variants.svelte';
 
 <style>
 	header {
+		position: absolute;
+		width: 100%;
+		height: 3.5rem;
 		padding: var(--gutter);
 		box-shadow: var(--shadow-elevation-medium);
 		color: var(--white-color);
@@ -90,10 +95,12 @@ import Variants from '$components/organisms/Variants.svelte';
 	}
 
 	main {
+		padding-top: 4rem;
 		height: 100%;
 	}
 	h1 {
 		margin: 0;
+		font-size: 1.4rem;
 		text-align: center;
 	}
 
@@ -107,15 +114,19 @@ import Variants from '$components/organisms/Variants.svelte';
 		height: 100%;
 	}
 
-    .grid-column {
+	.grid-column {
+		position: relative;
 		height: 100%;
 		padding: 0.5rem 1rem;
 		overflow-y: auto;
 	}
 
 	.placeholder {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
 		display: block;
-		margin-top: 50%;
 		color: var(--soft-black-color);
 		text-align: center;
 		font-size: 1.4rem;
