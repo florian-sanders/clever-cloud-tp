@@ -1,13 +1,12 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 
-	import Variant from '$components/molecules/Variant.svelte';
-	import Flavor from '$components/molecules/Flavor.svelte';
+	import Variants from '$components/organisms/Variants.svelte';
+	import Flavors from '$components/organisms/Flavors.svelte';
 	import CartItem from '$components/molecules/CartItem.svelte';
 
-	import { loading, variants, selectedVariant, cartItems, total } from '$stores';
+	import { loading, variants, cartItems, total } from '$stores';
 	import { getFormattedPrice, pluralize } from '$utilities';
-	import Variants from '$components/organisms/Variants.svelte';
 
 	onMount(async () => {
 		try {
@@ -41,9 +40,6 @@
 		}
 	});
 
-	$: displayedFlavors = $variants.find(
-		(variant) => $selectedVariant?.variantId === variant.id
-	)?.flavors;
 	$: formattedTotal = getFormattedPrice($total);
 	$: cartItemsCount = $cartItems.length;
 </script>
@@ -61,14 +57,7 @@
 			<Variants />
 		</div>
 		<div class="grid-column">
-			<h2>Pick runtime instance sizes</h2>
-			{#if $selectedVariant?.variantId}
-				{#each displayedFlavors as flavor}
-					<Flavor {flavor} />
-				{/each}
-			{:else}
-				<p class="placeholder">Select a runtime to display its options here</p>
-			{/if}
+			<Flavors />
 		</div>
 		<div class="grid-column">
 			<h2>{cartItemsCount} {pluralize(cartItemsCount, 'product')}</h2>
@@ -119,17 +108,5 @@
 		height: 100%;
 		padding: 0.5rem 1rem;
 		overflow-y: auto;
-	}
-
-	.placeholder {
-		position: absolute;
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -50%);
-		display: block;
-		color: var(--soft-black-color);
-		text-align: center;
-		font-size: 1.4rem;
-		font-weight: bold;
 	}
 </style>
