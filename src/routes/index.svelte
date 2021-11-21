@@ -1,12 +1,15 @@
 <script lang="ts">
+	/* Svelte imports */
 	import { onMount } from 'svelte';
 
+	/* Component imports */
 	import Variants from '$components/organisms/Variants.svelte';
 	import Flavors from '$components/organisms/Flavors.svelte';
-	import CartItem from '$components/molecules/CartItem.svelte';
+	import CartItems from '$components/organisms/CartItems.svelte';
 
-	import { loading, variants, cartItems, total } from '$stores';
-	import { getFormattedPrice, pluralize } from '$utilities';
+	/* Stores & helpters imports */
+	import { loading, variants, total } from '$stores';
+	import { getFormattedPrice } from '$utilities';
 
 	onMount(async () => {
 		try {
@@ -41,7 +44,6 @@
 	});
 
 	$: formattedTotal = getFormattedPrice($total);
-	$: cartItemsCount = $cartItems.length;
 </script>
 
 <svelte:head>
@@ -60,14 +62,7 @@
 			<Flavors />
 		</div>
 		<div class="grid-column">
-			<h2>{cartItemsCount} {pluralize(cartItemsCount, 'product')}</h2>
-			{#if $cartItems.length}
-				{#each $cartItems as cartItem}
-					<CartItem {cartItem} />
-				{/each}
-			{:else}
-				<p class="placeholder">Select runtime sizes to estimate the total cost</p>
-			{/if}
+			<CartItems />
 		</div>
 	</div>
 </main>
