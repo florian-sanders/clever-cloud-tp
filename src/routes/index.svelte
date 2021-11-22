@@ -8,7 +8,7 @@
 	import CartItems from '$components/organisms/CartItems.svelte';
 
 	/* Stores & helpters imports */
-	import { loading, variants, total } from '$stores';
+	import { loading, variants, total, selectedVariant } from '$stores';
 	import { getFormattedPrice } from '$utilities';
 
 	onMount(async () => {
@@ -19,13 +19,8 @@
 
 			$variants = data
 				.sort((a, b) => {
-					if (a.name < b.name) {
-						return -1;
-					}
-					if (a.name > b.name) {
-						return 1;
-					}
-
+					if (a.name > b.name) return 1;
+					if (a.name < b.name) return -1;
 					return 0;
 				})
 				.map((variant) => ({
@@ -43,6 +38,18 @@
 		}
 	});
 
+	let flavorsCol;
+
+	$: {
+		$selectedVariant;
+
+		flavorsCol?.scrollTo({
+			top: 0,
+			left: 0,
+			behavior: 'smooth'
+		});
+	}
+
 	$: formattedTotal = getFormattedPrice($total);
 </script>
 
@@ -58,7 +65,7 @@
 		<div class="grid-column">
 			<Variants />
 		</div>
-		<div class="grid-column">
+		<div class="grid-column" bind:this={flavorsCol}>
 			<Flavors />
 		</div>
 		<div class="grid-column">
@@ -86,11 +93,6 @@
 		margin: 0;
 		font-size: 1.4rem;
 		text-align: center;
-	}
-
-	h2 {
-		width: 100%;
-		margin: 0;
 	}
 	.grid {
 		display: grid;
