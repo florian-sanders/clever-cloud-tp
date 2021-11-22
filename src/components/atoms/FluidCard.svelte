@@ -29,6 +29,7 @@
 		border-radius: var(--border-radius);
 		box-shadow: var(--shadow-elevation-low);
 		margin: calc(var(--gutter) * 2) 0;
+		transition: box-shadow 0.3s ease-out;
 	}
 
 	.horizontal-card:hover,

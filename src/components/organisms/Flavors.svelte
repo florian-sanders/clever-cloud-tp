@@ -15,3 +15,9 @@
 {:else}
 	<p class="placeholder">Select a runtime to display its options here</p>
 {/if}
+
+<style>
+	h2 {
+		min-height: 4.5rem;
+	}
+</style>

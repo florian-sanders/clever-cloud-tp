@@ -31,6 +31,6 @@
 	<FlavorDataSheet {flavor} />
 	<svelte:fragment slot="price">
 		<p class="price">€&nbsp;{getFormattedPrice(flavor.price)}</p>
-		<SimpleButton action={addFlavorToCart} text="Add to estimate" skin="secondary" />
+		<SimpleButton action={addFlavorToCart} text="Add to estimate" skin="primary" />
 	</svelte:fragment>
 </FluidCard>

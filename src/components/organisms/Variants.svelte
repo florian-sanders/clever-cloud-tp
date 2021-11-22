@@ -25,7 +25,7 @@
 <details>
 	<summary>Filter</summary>
 	<div class="filter">
-		<label for="variant-filter">Enter characters to filter the results below</label>
+		<label for="variant-filter">Runtime name or stack</label>
 		<input id="variant-filter" type="text" bind:value={filterCriterion} />
 	</div>
 </details>
@@ -35,9 +35,9 @@
 		<strong>Chargement en cours</strong>
 	{:else}
 		<strong>{displayedVariants.length} {pluralize(displayedVariants.length, 'result')}</strong> available
-		below
 	{/if}
 </p>
+
 <div class="fluid-grid">
 	{#if $loading}
 		<Loader />
