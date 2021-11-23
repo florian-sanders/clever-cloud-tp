@@ -58,6 +58,7 @@
 	let flavorsColumn: HTMLDivElement;
 	let cartItemsColumn: HTMLDivElement;
 	let gridColumns: Array<HTMLDivElement>;
+	let currentColumnGrid: HTMLDivElement;
 	let currentColumnIndex: number = 0;
 
 	/**
@@ -65,6 +66,13 @@
 	 * @param e {DOM Event} the event triggered by keydown listener in the grid
 	 */
 	let switchColumn = (e) => {
+		/* 
+		* Since focus is moved upon selecting Variant, we have to find the closest column grid
+		* Might be simplified with declarative pattern but no time to check
+		*/
+		currentColumnGrid = e.target.closest('.grid-column');
+		currentColumnIndex = gridColumns.indexOf(currentColumnGrid);
+
 		/* Modulo is used to cycle through the array of DOM elements to enable circular nav */
 		switch (e.key) {
 			case 'ArrowRight':
