@@ -8,9 +8,23 @@
 	import CartItems from '$components/organisms/CartItems.svelte';
 
 	/* Stores & helpters imports */
-	import { loading, variants, total, selectedVariant } from '$stores';
+	import { loading, variants, total } from '$stores';
 	import { getFormattedPrice } from '$utilities';
 
+	/**
+	 * When component is mounted: 
+	 * fetch data, order it by Variant name (alphabetical)
+	 * and save only relevant info in state (see Variants interface below)
+	 * 
+	 * interface Variant {
+			id: string
+			language: string
+			imgPath: string
+			name: string
+			deployments: Array<string>
+			flavors: Array<Flavor>
+    	}
+	*/
 	onMount(async () => {
 		try {
 			const response = await fetch('https://api.clever-cloud.com/v2/products/instances');
@@ -34,23 +48,30 @@
 		} catch (error) {
 			console.log(error);
 		} finally {
+			/* App is in loading state by default so we set it to false at the end */
 			$loading = false;
 		}
 	});
 
+	/* refs used by switchColumn function */
 	let variantsColumn: HTMLDivElement;
 	let flavorsColumn: HTMLDivElement;
 	let cartItemsColumn: HTMLDivElement;
 	let gridColumns: Array<HTMLDivElement>;
 	let currentColumnIndex: number = 0;
 
+	/**
+	 * Function - Allow users to switch column using arrow keys when inside the grid
+	 * @param e {DOM Event} the event triggered by keydown listener in the grid
+	 */
 	let switchColumn = (e) => {
+		/* Modulo is used to cycle through the array of DOM elements to enable circular nav */
 		switch (e.key) {
 			case 'ArrowRight':
 				currentColumnIndex = (currentColumnIndex + 1) % gridColumns.length;
 				break;
 			case 'ArrowLeft':
-				currentColumnIndex = (currentColumnIndex + (gridColumns.length - 1)) % gridColumns.length;
+				currentColumnIndex = (currentColumnIndex + (gridColumns.length - 1)) % gridColumns.length; // previous element, instead of -1 we use +2
 				break;
 			default:
 				return;
@@ -59,6 +80,7 @@
 		gridColumns[currentColumnIndex]?.focus();
 	};
 
+	// make sure to fill the array only after all refs have been initialized
 	$: if (variantsColumn && flavorsColumn && cartItemsColumn) {
 		gridColumns = [variantsColumn, flavorsColumn, cartItemsColumn];
 	}
