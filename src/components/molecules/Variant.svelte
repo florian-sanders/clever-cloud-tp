@@ -4,18 +4,32 @@
 
 	Variant card
 
-	@prop {number} id - The id of the variant (used to track the selected variant)
-	@prop {string} imgPath - The path of variant img (no default path because the API always provides one)
-	@prop {string} name - The variant name
+	@prop {Variant} a Variant (see interface below)
+	interface Variant {
+		id: string
+		language: string
+		imgPath: string
+		name: string
+		deployments: Array<string>
+		flavors: Array<Flavor>
+	}
  -->
 <script lang="ts">
+	/* svelte imports */
 	import { fade } from 'svelte/transition';
-	import type { Variant } from '$interfaces';
-	import { selectedVariant } from '$stores';
+
+	/* Component imports */
 	import SimpleButton from '$components/atoms/SimpleButton.svelte';
+
+	/* TypeScript imports */
+	import type { Variant } from '$interfaces';
+
+	/* stores and helpers import */
+	import { selectedVariant } from '$stores';
 
 	export let variant: Variant;
 
+	/* used to match deployment string from Variant with its corresponding image path */
 	enum deploymentImgs {
 		'git' = '/img/git.svg',
 		'ftp' = '/img/ftp.png'
@@ -36,7 +50,7 @@
 
 <div class="variant-card" class:selected={isSelected} transition:fade>
 	<div class="variant-header">
-		<img class="variant-logo" src={variant.imgPath} alt="" width="176" height="181"/>
+		<img class="variant-logo" src={variant.imgPath} alt="" width="176" height="181" />
 		<h3 id={`variant-${variant.id}`}>{variant.name}</h3>
 	</div>
 	<div class="deployment">
