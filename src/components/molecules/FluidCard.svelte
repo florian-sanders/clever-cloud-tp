@@ -28,7 +28,7 @@
 		background-color: var(--light-primary-color);
 		border-radius: var(--border-radius);
 		box-shadow: var(--shadow-elevation-low);
-		margin: calc(var(--gutter) * 2) 0;
+		margin-bottom: var(--gutter);
 		transition: box-shadow 0.3s ease-out;
 	}
 
@@ -42,7 +42,7 @@
 		letter-spacing: 2px;
 		min-width: 3rem;
 		font-size: 0.9rem;
-		font-weight: bold;
+		font-weight: 600;
 		text-align: center;
 		text-transform: uppercase;
 	}
@@ -53,6 +53,7 @@
 		justify-content: space-evenly;
 		gap: 1rem;
 		align-items: center;
+		font-family: 'Ubuntu', Arial, Helvetica, sans-serif;
 		font-weight: bold;
 		font-size: 1.3rem;
 	}
