@@ -16,7 +16,7 @@
 		displayedFlavors = $variants.find(
 			(variant) => $selectedVariant?.variantId === variant.id
 		)?.flavors;
-		
+
 		if (displayedFlavors) focusHeading();
 	}
 </script>
@@ -32,11 +32,3 @@
 {:else}
 	<p class="placeholder">Select a runtime to display its options here</p>
 {/if}
-
-<style>
-	.header {
-		min-height: 8.5rem;
-		display: flex;
-		justify-content: center;
-	}
-</style>
