@@ -1,3 +1,15 @@
+<!-- 
+	@component
+	FluidCard
+
+	card component, horizontal when there is enough space
+	elements flow vertically when not enough space
+	Mainly a CSS component
+
+	@slot default - card body. Its content.
+	@slot heading - this should be simplified, it is not necessary and does no bring much.
+	@slot price - optional to display price and button on top of each other, at the end of the card
+ -->
 <script>
 	import { fade } from 'svelte/transition';
 </script>
@@ -38,6 +50,7 @@
 		box-shadow: var(--shadow-elevation-medium);
 	}
 
+	/* could move this to global utilitary class and avoid managing heading style in this component */
 	.card-heading {
 		letter-spacing: 2px;
 		min-width: 3rem;
