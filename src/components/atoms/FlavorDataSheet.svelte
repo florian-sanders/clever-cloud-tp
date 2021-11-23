@@ -39,16 +39,17 @@
     .data-sheet {
         display: flex;
         flex-flow: row wrap;
-        gap: var(--gutter);
+		align-items: center;
+        gap: 1.5rem;
     }
 	dl {
 		display: grid;
 		grid-template-columns: auto 1fr;
-		row-gap: calc(var(--gutter) / 2);
+		row-gap: calc(var(--gutter) / 1.5);
 		align-items: center;
 		width: max-content;
         height: max-content;
-		font-size: 0.8rem;
+		font-size: 0.9rem;
 	}
 
 	dd {
