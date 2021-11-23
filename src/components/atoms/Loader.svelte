@@ -1,3 +1,9 @@
+<!-- 
+	@component
+	Loader
+
+	Simple spinner 
+ -->
 <script lang="ts">
 	import { fade } from 'svelte/transition';
 </script>
