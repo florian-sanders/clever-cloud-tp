@@ -54,11 +54,12 @@
 </script>
 
 <svelte:head>
-	<title>Clever cloud - Cart</title>
+	<title>Clever Price viewer</title>
 </svelte:head>
 
 <header role="banner">
-	<h1 role="status">Total: € {formattedTotal}</h1>
+	<p class="site-name">Clever Price Viewer</p>
+	<h1 class="total">Total: <strong>€ {formattedTotal}</strong></h1>
 </header>
 <main>
 	<div class="grid">
@@ -77,23 +78,42 @@
 <style>
 	header {
 		position: absolute;
+		display: flex;
+		justify-content: space-between;
 		width: 100%;
 		height: 3.5rem;
 		padding: var(--gutter);
 		box-shadow: var(--shadow-elevation-medium);
 		color: var(--white-color);
 		background: linear-gradient(140deg, var(--primary-color), var(--secondary-color));
+		font-family: 'Montserrat', Arial, Helvetica, sans-serif;
 	}
 
+	h1 {
+		margin: 0;
+		font-size: 1.2rem;
+		font-weight: normal;
+	}
+
+	.site-name {
+		font-size: 1.2rem;
+		font-weight: bold;
+	}
+	.total {
+		font-size: 1.2rem;
+	}
+
+	.total strong {
+		font-size: 1.3rem;
+		letter-spacing: 1px;
+		margin-left: calc(var(--gutter) / 2);
+	}
+	
 	main {
 		padding-top: 4rem;
 		height: 100%;
 	}
-	h1 {
-		margin: 0;
-		font-size: 1.4rem;
-		text-align: center;
-	}
+	
 	.grid {
 		display: grid;
 		grid-template-columns: repeat(3, 1fr);
