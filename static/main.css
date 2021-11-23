@@ -15,10 +15,10 @@
     0.5px 1px 1.7px hsl(var(--shadow-color) / 0.16),
     1.1px 2.1px 3.6px hsl(var(--shadow-color) / 0.32);
   --shadow-elevation-medium:
-  0.3px 0.5px 0.9px hsl(var(--shadow-color) / 0),
-  1.1px 2.1px 3.6px hsl(var(--shadow-color) / 0.13),
-  2.1px 4.2px 7px hsl(var(--shadow-color) / 0.25),
-  4.3px 8.6px 14.4px hsl(var(--shadow-color) / 0.38);
+    0.3px 0.5px 0.9px hsl(var(--shadow-color) / 0),
+    1.1px 2.1px 3.6px hsl(var(--shadow-color) / 0.13),
+    2.1px 4.2px 7px hsl(var(--shadow-color) / 0.25),
+    4.3px 8.6px 14.4px hsl(var(--shadow-color) / 0.38);
   --shadow-elevation-high:
     0.3px 0.5px 0.9px hsl(var(--shadow-color) / 0),
     2.2px 4.3px 7.2px hsl(var(--shadow-color) / 0.08),
@@ -58,9 +58,23 @@ h1, h2, h3, h4, h5, h6, p, ul, li {
   height: 100vh;
 }
 
-*:focus-visible {
+/* focus-visible fallback */
+*:focus {
   outline: var(--generic-outline);
   outline-offset: var(--generic-outline-offset);
+}
+
+@supports selector(div:focus-visible) {
+  /* mouse click / active focus */
+  .custom-button:focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  /* keyboard focus only */
+  .custom-button:focus-visible {
+    outline: var(--generic-outline);
+    outline-offset: var(--generic-outline-offset);
+  }
 }
 
 .placeholder {
