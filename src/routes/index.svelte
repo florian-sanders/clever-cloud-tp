@@ -38,18 +38,6 @@
 		}
 	});
 
-	let flavorsCol;
-
-	$: {
-		$selectedVariant;
-
-		flavorsCol?.scrollTo({
-			top: 0,
-			left: 0,
-			behavior: 'smooth'
-		});
-	}
-
 	$: formattedTotal = getFormattedPrice($total);
 </script>
 
@@ -66,7 +54,7 @@
 		<div class="grid-column">
 			<Variants />
 		</div>
-		<div class="grid-column" bind:this={flavorsCol}>
+		<div class="grid-column">
 			<Flavors />
 		</div>
 		<div class="grid-column">
@@ -108,7 +96,7 @@
 		letter-spacing: 1px;
 		margin-left: calc(var(--gutter) / 2);
 	}
-	
+
 	main {
 		padding-top: 4rem;
 		height: 100%;
@@ -125,5 +113,6 @@
 		height: 100%;
 		padding: 0.5rem 1rem;
 		overflow-y: auto;
+		scroll-behavior: smooth;
 	}
 </style>

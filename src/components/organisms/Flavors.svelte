@@ -1,15 +1,28 @@
 <script lang="ts">
+	import type { Flavor as FlavorType} from '$interfaces';
+
 	import { selectedVariant, variants } from '$stores';
 	import Flavor from '$components/molecules/Flavor.svelte';
 	import GridColumnHeader from '$components/atoms/GridColumnHeader.svelte';
 
-	$: displayedFlavors = $variants.find(
-		(variant) => $selectedVariant?.variantId === variant.id
-	)?.flavors;
+	let columnHeading: HTMLHeadingElement;
+	let displayedFlavors: Array<FlavorType>;
+
+	let focusHeading = () => {
+		columnHeading?.focus();
+	};
+
+	$: {
+		displayedFlavors = $variants.find(
+			(variant) => $selectedVariant?.variantId === variant.id
+		)?.flavors;
+		
+		if (displayedFlavors) focusHeading();
+	}
 </script>
 
 <GridColumnHeader>
-	<h2>Pick virtual machine sizes</h2>
+	<h2 tabindex="-1" bind:this={columnHeading}>Pick virtual machine sizes</h2>
 </GridColumnHeader>
 
 {#if $selectedVariant?.variantId}
