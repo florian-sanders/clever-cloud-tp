@@ -1,13 +1,22 @@
+<!-- 
+	/**
+	* @component CartItems
+	* List of CartItem components. Contains a header with a heading guiding users.
+	*/ 
+-->
 <script lang="ts">
+	/* Component imports */
 	import GridColumnHeader from '$components/atoms/GridColumnHeader.svelte';
 	import SimpleButton from '$components/atoms/SimpleButton.svelte';
 	import CartItem from '$components/molecules/CartItem.svelte';
 
+	/* stores and helpers imports */
 	import { cartItems } from '$stores';
 	import { pluralize } from '$utilities';
 
 	let removeAllItems = () => cartItems.update(() => []);
 
+	/* necesary because cartItems is watched but its properties are not */
 	$: cartItemsCount = $cartItems.length;
 </script>
 
