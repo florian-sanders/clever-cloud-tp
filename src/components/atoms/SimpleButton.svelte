@@ -5,14 +5,12 @@
 	Basic button with 3 different styles
 
 	@prop {function} action - Callback to be triggered on click
-	@prop {string} text - Text displayed inside the button
 	@prop {'primary' | 'secondary' | 'cautionary'} skin - Visual appearance of the button (default='primary') 		
 	@prop {isPushButton} boolean - If true, button is a toggle button alternating between states (default=false)
 	@prop {isPressed} boolean - State of the toggle button (pressed or not pressed) (default=false)
  -->
 <script lang="ts">
 	export let action: () => void;
-	export let text: string;
 	export let skin: 'primary' | 'secondary' | 'cautionary' = 'primary';
 	export let isDisabled: boolean = false;
 </script>
@@ -24,8 +22,7 @@
 	disabled={isDisabled}
 	style={`--component-color: var(--${skin}-color)`}
 >
-	{text}
-	<slot name="img" />
+	<slot />
 </button>
 
 <style>
@@ -37,7 +34,8 @@
 		border: solid 1px transparent;
 		box-shadow: var(--shadow-elevation-high);
 		color: var(--white-color);
-		font-weight: bold;
+		font-family: 'Ubuntu', Arial;
+		font-weight: 600;
 		cursor: pointer;
 		transition: background-color 0.4s ease-out;
 	}

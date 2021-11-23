@@ -10,7 +10,7 @@
 	import type { Flavor, CartItem } from '$interfaces';
 	import FlavorDataSheet from '$components/atoms/FlavorDataSheet.svelte';
 	import SimpleButton from '$components/atoms/SimpleButton.svelte';
-	import FluidCard from '$components/atoms/FluidCard.svelte';
+	import FluidCard from '$components/molecules/FluidCard.svelte';
 	import { selectedVariant, cartItems } from '$stores';
 	import { getFormattedPrice } from '$utilities';
 
@@ -31,6 +31,8 @@
 	<FlavorDataSheet {flavor} />
 	<svelte:fragment slot="price">
 		<p class="price">€&nbsp;{getFormattedPrice(flavor.price)}</p>
-		<SimpleButton action={addFlavorToCart} text="Add to estimate" skin="primary" />
+		<SimpleButton action={addFlavorToCart} skin="secondary">
+			Add to estimate
+		</SimpleButton>
 	</svelte:fragment>
 </FluidCard>

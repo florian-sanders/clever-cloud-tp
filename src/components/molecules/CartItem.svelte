@@ -3,7 +3,7 @@
 
 	import SimpleButton from '$components/atoms/SimpleButton.svelte';
 	import FlavorDataSheet from '$components/atoms/FlavorDataSheet.svelte';
-	import FluidCard from '$components/atoms/FluidCard.svelte';
+	import FluidCard from '$components/molecules/FluidCard.svelte';
 	import { getFormattedPrice } from '$utilities';
 	import { cartItems } from '$stores';
 
@@ -19,11 +19,11 @@
 
 <FluidCard>
 	<h3 slot="heading">
-		<div class="variant-info">
+		<span class="variant-info">
 			<img src={variantInfo.variantImgPath} alt="" width="40" />
-			<span>{variantInfo.variantName}</span>
-			{flavor.name}
-		</div>
+			<span class="variant-name">{variantInfo.variantName}</span>
+			<span class="flavor-name">{flavor.name}</span>
+		</span>
 	</h3>
 	<details>
 		<summary>Specifications</summary>
@@ -32,7 +32,7 @@
 
 	<svelte:fragment slot="price">
 		<p>€ {getFormattedPrice(flavor.price)}</p>
-		<SimpleButton action={removeItemFromCart} text="Remove" skin="cautionary" />
+		<SimpleButton action={removeItemFromCart} skin="cautionary">Remove</SimpleButton>
 	</svelte:fragment>
 </FluidCard>
 
@@ -43,20 +43,24 @@
 	}
 
 	.variant-info {
-		display: grid;
-		grid-template-columns: 40px repeat(auto-fit, minmax(80px, 1fr));
+		display: flex;
+		flex-flow: row wrap;
 		align-items: center;
-		justify-content: center;
 		gap: var(--gutter);
-		width: clamp(9rem, 10.1vw, 16rem);
 	}
 
-	.variant-info span {
+	.variant-name {
 		display: block;
+		width: 4rem;
 		font-weight: normal;
 		text-transform: none;
 		letter-spacing: initial;
 		text-align: left;
+	}
+
+	.flavor-name {
+		display: block;
+		width: 4rem;
 	}
 
 	.variant-info img {

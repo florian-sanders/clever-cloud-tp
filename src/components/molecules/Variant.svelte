@@ -34,30 +34,23 @@
 	};
 </script>
 
-<div
-	class="variant-card"
-	class:selected={isSelected}
-	transition:fade
->
+<div class="variant-card" class:selected={isSelected} transition:fade>
 	<div class="variant-header">
-		<img class="variant-logo" src={variant.imgPath} alt="" width="50" />
+		<img class="variant-logo" src={variant.imgPath} alt="" width="176" height="181"/>
 		<h3 id={`variant-${variant.id}`}>{variant.name}</h3>
 	</div>
 	<div class="deployment">
 		<p>Deployment</p>
 		<ul>
 			{#each variant.deployments as deployment}
-				<li><img src={deploymentImgs[deployment]} alt={deployment} height="30" /></li>
+				<li><img src={deploymentImgs[deployment]} alt={deployment} height="30" width="38" /></li>
 			{/each}
 		</ul>
 	</div>
 	<div class="button">
-		<SimpleButton
-			action={selectVariant}
-			text={isSelected ? 'Selected' : 'Select'}
-			skin="primary"
-			isDisabled={isSelected}
-		/>
+		<SimpleButton action={selectVariant} skin="primary" isDisabled={isSelected}>
+			{isSelected ? 'Selected' : 'Select'}
+		</SimpleButton>
 	</div>
 </div>
 
@@ -106,6 +99,9 @@
 	.variant-logo {
 		position: relative;
 		width: 100%;
+		height: 100%;
+		aspect-ratio: 1 / 1;
+		object-fit: cover;
 		border-radius: var(--border-radius) var(--border-radius) 0 0;
 	}
 
@@ -136,6 +132,8 @@
 
 	.deployment img {
 		height: 1rem;
+		aspect-ratio: 4 / 3;
+		object-fit: cover;
 	}
 
 	.button {
