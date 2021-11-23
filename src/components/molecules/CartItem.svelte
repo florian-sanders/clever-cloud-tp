@@ -1,20 +1,48 @@
-<script lang="ts">
-	import type { CartItem } from '$interfaces';
+<!-- 
+	@component
+	CartItem
 
+	CartItem card
+
+	@prop {CartItem} cartItem (see interface below)
+	CartItem  {
+		variantInfo: {
+			variantId: string,
+			variantImgPath: string,
+			variantName: string
+		},
+		flavor: Flavor {
+			name: string;
+			cpus: number;
+			gpus: number;
+			mem: number;
+			price: number;
+			price_id: string;
+			microservice: boolean;
+			machine_learning: boolean;
+		}
+	}
+ -->
+<script lang="ts">
+	/* Component imports */
 	import SimpleButton from '$components/atoms/SimpleButton.svelte';
 	import FlavorDataSheet from '$components/atoms/FlavorDataSheet.svelte';
 	import FluidCard from '$components/molecules/FluidCard.svelte';
-	import { getFormattedPrice } from '$utilities';
+
+	/* TypeScript imports */
+	import type { CartItem } from '$interfaces';
+
+	/* stores and helper imports */
 	import { cartItems } from '$stores';
+	import { getFormattedPrice } from '$utilities';
 
 	export let cartItem: CartItem;
 
+	/* destructuring to avoid having to use flavor.prop.prop */
 	$: ({ variantInfo, flavor } = cartItem);
 
 	let removeItemFromCart = () =>
-		cartItems.update((previousCartItems) =>
-			previousCartItems.filter((prevCartItem) => prevCartItem != cartItem)
-		);
+		($cartItems = $cartItems.filter((prevCartItem) => prevCartItem != cartItem));
 </script>
 
 <FluidCard>
