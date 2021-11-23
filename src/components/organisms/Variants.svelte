@@ -1,3 +1,9 @@
+<!-- 
+	/**
+	* @component Variants
+	* List of Variant components. Contains a header with a heading guiding user.
+	*/ 
+-->
 <script lang="ts">
 	/* Component imports */
 	import Variant from '$components/molecules/Variant.svelte';
