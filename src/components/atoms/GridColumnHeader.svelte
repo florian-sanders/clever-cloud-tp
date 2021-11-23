@@ -1,3 +1,9 @@
+<!-- 
+	@component
+	GridColumnHeader
+
+	Header for grid columns. Mainly used to make sure they all have consistent height and styles.
+ -->
 <div class="grid-col-header">
 	<slot />
 </div>
