@@ -4,6 +4,7 @@
 	import { variants, loading } from '$stores';
 
 	import { pluralize } from '$utilities';
+import GridColumnHeader from '$components/atoms/GridColumnHeader.svelte';
 
 	let filterCriterion = '';
 	let displayedVariants = $variants;
@@ -21,22 +22,24 @@
 	}
 </script>
 
-<h2>Select a runtime</h2>
-<details>
-	<summary>Filter</summary>
-	<div class="filter">
-		<label for="variant-filter">Runtime name or stack</label>
-		<input id="variant-filter" type="text" bind:value={filterCriterion} />
-	</div>
-</details>
+<GridColumnHeader>
+	<h2>Select runtime</h2>
+	<details>
+		<summary>Filter</summary>
+		<div class="filter">
+			<label for="variant-filter">Runtime name or stack</label>
+			<input id="variant-filter" type="text" bind:value={filterCriterion} />
+		</div>
+	</details>
 
-<p class="announcer" role="status">
-	{#if $loading}
-		<strong>Chargement en cours</strong>
-	{:else}
-		<strong>{displayedVariants.length} {pluralize(displayedVariants.length, 'result')}</strong> available
-	{/if}
-</p>
+	<p class="announcer" role="status">
+		{#if $loading}
+			<strong>Chargement en cours</strong>
+		{:else}
+			<strong>{displayedVariants.length} {pluralize(displayedVariants.length, 'result')}</strong> available
+		{/if}
+	</p>
+</GridColumnHeader>
 
 <div class="fluid-grid">
 	{#if $loading}
@@ -56,8 +59,10 @@
 	input {
 		display: block;
 		width: 100%;
-		padding: calc(var(--gutter) / 2);
+		padding: calc(var(--gutter) / 1.5);
 		margin-top: calc(var(--gutter) / 2);
+		border-radius: 0 var(--border-radius) var(--border-radius) var(--border-radius);
+		box-shadow: var(--shadow-elevation-low);
 	}
 
 	.announcer {

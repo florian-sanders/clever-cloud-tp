@@ -1,13 +1,17 @@
 <script lang="ts">
-    import { selectedVariant, variants } from '$stores';
-    import Flavor from '$components/molecules/Flavor.svelte';
+	import { selectedVariant, variants } from '$stores';
+	import Flavor from '$components/molecules/Flavor.svelte';
+	import GridColumnHeader from '$components/atoms/GridColumnHeader.svelte';
 
-    $: displayedFlavors = $variants.find(
+	$: displayedFlavors = $variants.find(
 		(variant) => $selectedVariant?.variantId === variant.id
 	)?.flavors;
 </script>
 
-<h2>Pick runtime instance sizes</h2>
+<GridColumnHeader>
+	<h2>Pick virtual machine sizes</h2>
+</GridColumnHeader>
+
 {#if $selectedVariant?.variantId}
 	{#each displayedFlavors as flavor}
 		<Flavor {flavor} />
@@ -17,7 +21,9 @@
 {/if}
 
 <style>
-	h2 {
-		min-height: 4.5rem;
+	.header {
+		min-height: 8.5rem;
+		display: flex;
+		justify-content: center;
 	}
 </style>
