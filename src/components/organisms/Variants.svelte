@@ -1,15 +1,22 @@
 <script lang="ts">
+	/* Component imports */
 	import Variant from '$components/molecules/Variant.svelte';
 	import Loader from '$components/atoms/Loader.svelte';
+	import GridColumnHeader from '$components/atoms/GridColumnHeader.svelte';
+
+	/* Stores & helpers imports */
 	import { variants, loading } from '$stores';
-
 	import { pluralize } from '$utilities';
-import GridColumnHeader from '$components/atoms/GridColumnHeader.svelte';
 
+	/**
+	 * Used to filter Variants based on user input
+	 * Necessary to avoid too much scrolling because there are 25 variants
+	 */
 	let filterCriterion = '';
 	let displayedVariants = $variants;
 
 	$: {
+		/* Displayed variants are filtered everytime filterCriterion is updated (when user types in) */
 		if (filterCriterion.trim()) {
 			displayedVariants = $variants.filter(
 				(variant) =>
@@ -17,6 +24,7 @@ import GridColumnHeader from '$components/atoms/GridColumnHeader.svelte';
 					variant.language.toLowerCase().includes(filterCriterion.toLowerCase())
 			);
 		} else {
+			/* if there is no user input, display all variants */
 			displayedVariants = $variants;
 		}
 	}
@@ -71,6 +79,7 @@ import GridColumnHeader from '$components/atoms/GridColumnHeader.svelte';
 
 	.fluid-grid {
 		display: grid;
+		/* 3 columns when there is enough space. 1 full-width column otherwise */
 		grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
 		grid-auto-rows: max-content;
 		gap: calc(var(--gutter) * 2);
