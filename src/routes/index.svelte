@@ -38,6 +38,30 @@
 		}
 	});
 
+	let variantsColumn: HTMLDivElement;
+	let flavorsColumn: HTMLDivElement;
+	let cartItemsColumn: HTMLDivElement;
+	let gridColumns: Array<HTMLDivElement>;
+	let currentColumnIndex: number = 0;
+
+	let switchColumn = (e) => {
+		switch (e.key) {
+			case 'ArrowRight':
+				currentColumnIndex = (currentColumnIndex + 1) % gridColumns.length;
+				break;
+			case 'ArrowLeft':
+				currentColumnIndex = (currentColumnIndex + (gridColumns.length - 1)) % gridColumns.length;
+				break;
+			default:
+				return;
+		}
+
+		gridColumns[currentColumnIndex]?.focus();
+	};
+
+	$: if (variantsColumn && flavorsColumn && cartItemsColumn) {
+		gridColumns = [variantsColumn, flavorsColumn, cartItemsColumn];
+	}
 	$: formattedTotal = getFormattedPrice($total);
 </script>
 
@@ -50,14 +74,14 @@
 	<h1 class="total">Total: <strong>€ {formattedTotal}</strong></h1>
 </header>
 <main>
-	<div class="grid">
-		<div class="grid-column">
+	<div class="grid" on:keydown={switchColumn}>
+		<div class="grid-column" tabindex="-1" bind:this={variantsColumn}>
 			<Variants />
 		</div>
-		<div class="grid-column">
+		<div class="grid-column" tabindex="-1" bind:this={flavorsColumn}>
 			<Flavors />
 		</div>
-		<div class="grid-column">
+		<div class="grid-column" tabindex="-1" bind:this={cartItemsColumn}>
 			<CartItems />
 		</div>
 	</div>
@@ -101,7 +125,7 @@
 		padding-top: 4rem;
 		height: 100%;
 	}
-	
+
 	.grid {
 		display: grid;
 		grid-template-columns: repeat(3, 1fr);
