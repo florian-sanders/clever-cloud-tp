@@ -5,9 +5,8 @@
 	Basic button with 3 different styles
 
 	@prop {function} action - Callback to be triggered on click
-	@prop {'primary' | 'secondary' | 'cautionary'} skin - Visual appearance of the button (default='primary') 		
-	@prop {isPushButton} boolean - If true, button is a toggle button alternating between states (default=false)
-	@prop {isPressed} boolean - State of the toggle button (pressed or not pressed) (default=false)
+	@prop {'primary' | 'secondary' | 'cautionary'} skin - Visual appearance of the button (default='primary') 
+	@prop {boolean} isDisabled - Wether the button is disabled or not (default=false) 
  -->
 <script lang="ts">
 	export let action: () => void;
