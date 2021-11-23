@@ -44,7 +44,7 @@
 }
 
 body {
-  font-family: "Ubuntu", sans-serif;
+  font-family: 'Oxygen', Arial, Helvetica, sans-serif;
   margin: 0;
   padding: 0;
 }
@@ -52,12 +52,6 @@ body {
 h1, h2, h3, h4, h5, h6, p, ul, li {
   margin: 0;
   padding: 0;
-}
-
-h2 {
-  font-size: 1.1rem;
-  text-align: center;
-  margin-bottom: var(--gutter);
 }
 
 #svelte {
@@ -71,12 +65,12 @@ h2 {
 
 .placeholder {
   position: absolute;
-  top: 50%;
+  top: 50vh;
   left: 50%;
   transform: translate(-50%, -50%);
   display: block;
   color: var(--soft-black-color);
   text-align: center;
-  font-size: 1.4rem;
+  font-size: 1.1rem;
   font-weight: bold;
 }
