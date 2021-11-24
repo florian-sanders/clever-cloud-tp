@@ -40,7 +40,7 @@
 		background-color: var(--light-primary-color);
 		border-radius: var(--border-radius);
 		box-shadow: var(--shadow-elevation-low);
-		margin-bottom: var(--gutter);
+		margin-bottom: calc(var(--gutter) * 2);
 		transition: box-shadow 0.3s ease-out;
 	}
 
