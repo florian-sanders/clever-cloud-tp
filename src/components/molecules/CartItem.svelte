@@ -25,7 +25,7 @@
  -->
 <script lang="ts">
 	/* svelte imports */
-	import { onDestroy } from 'svelte';
+	import { onMount } from 'svelte';
 
 	/* Component imports */
 	import SimpleButton from '$components/atoms/SimpleButton.svelte';
@@ -41,6 +41,14 @@
 
 	export let cartItem: CartItem;
 
+	onMount(() => {
+		cartItemHeadingElement.scrollIntoView({
+			behavior: 'smooth',
+			block: 'start',
+			inline: 'nearest'
+		});
+	});
+
 	let cartItemHeadingElement: HTMLHeadingElement;
 	let elementToFocus: HTMLDivElement | HTMLHeadingElement;
 
@@ -49,13 +57,13 @@
 
 	let removeItemFromCart = () => {
 		$cartItems = $cartItems.filter((prevCartItem) => prevCartItem != cartItem);
-		if($cartItems.length > 0) {
+		if ($cartItems.length > 0) {
 			elementToFocus = cartItemHeadingElement.closest('h3');
 		} else {
 			elementToFocus = cartItemHeadingElement.closest('.grid-column');
 		}
 		elementToFocus.focus();
-	}
+	};
 </script>
 
 <FluidCard>
