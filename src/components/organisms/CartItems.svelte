@@ -28,7 +28,7 @@
 <GridColumnHeader>
 	<h2 tabindex="-1">View selected items</h2>
 	<p class="status" bind:this={itemCountElement} tabindex="-1">
-		<span><strong>{cartItemsCount}</strong> {pluralize(cartItemsCount, 'product')}</span>
+		<span aria-live="polite" aria-atomic="true"><strong>{cartItemsCount}</strong> {pluralize(cartItemsCount, 'product')}</span>
 		{#if cartItemsCount}
 			<SimpleButton skin="cautionary" action={removeAllItems}>Remove All</SimpleButton>
 		{/if}

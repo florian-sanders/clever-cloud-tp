@@ -101,7 +101,7 @@
 
 <header role="banner">
 	<p class="site-name">Clever Price Viewer</p>
-	<h1 class="total">Total: <strong>€ {formattedTotal}</strong></h1>
+	<h1 class="total" aria-live="polite" aria-atomic="true">Total: <strong>€ {formattedTotal}</strong></h1>
 </header>
 <main>
 	<div class="grid" on:keydown={switchColumn}>

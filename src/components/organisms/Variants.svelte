@@ -46,7 +46,7 @@
 		</div>
 	</details>
 
-	<p class="announcer" role="status">
+	<p class="announcer" aria-live="polite" aria-atomic="true">
 		{#if $loading}
 			<strong>Chargement en cours</strong>
 		{:else}
