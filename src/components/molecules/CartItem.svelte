@@ -24,6 +24,9 @@
 	}
  -->
 <script lang="ts">
+	/* svelte imports */
+	import { onDestroy } from 'svelte';
+
 	/* Component imports */
 	import SimpleButton from '$components/atoms/SimpleButton.svelte';
 	import FlavorDataSheet from '$components/atoms/FlavorDataSheet.svelte';
@@ -38,15 +41,25 @@
 
 	export let cartItem: CartItem;
 
+	let cartItemHeadingElement: HTMLHeadingElement;
+	let elementToFocus: HTMLDivElement | HTMLHeadingElement;
+
 	/* destructuring to avoid having to use flavor.prop.prop */
 	$: ({ variantInfo, flavor } = cartItem);
 
-	let removeItemFromCart = () =>
-		($cartItems = $cartItems.filter((prevCartItem) => prevCartItem != cartItem));
+	let removeItemFromCart = () => {
+		$cartItems = $cartItems.filter((prevCartItem) => prevCartItem != cartItem);
+		if($cartItems.length > 0) {
+			elementToFocus = cartItemHeadingElement.closest('h3');
+		} else {
+			elementToFocus = cartItemHeadingElement.closest('.grid-column');
+		}
+		elementToFocus.focus();
+	}
 </script>
 
 <FluidCard>
-	<h3 slot="heading">
+	<h3 slot="heading" bind:this={cartItemHeadingElement} tabindex="-1">
 		<span class="variant-info">
 			<img src={variantInfo.variantImgPath} alt="" width="40" />
 			<span class="variant-name">{variantInfo.variantName}</span>

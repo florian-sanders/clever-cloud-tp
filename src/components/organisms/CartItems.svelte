@@ -14,7 +14,7 @@
 	import { cartItems } from '$stores';
 	import { pluralize } from '$utilities';
 
-	let itemCountElement: HTMLDivElement;
+	let itemCountElement: HTMLParagraphElement;
 
 	let removeAllItems = () => {
 		$cartItems = [];
@@ -26,7 +26,7 @@
 </script>
 
 <GridColumnHeader>
-	<h2>View selected items in estimate</h2>
+	<h2 tabindex="-1">View selected items in estimate</h2>
 	<p class="status" bind:this={itemCountElement} tabindex="-1">
 		<span><strong>{cartItemsCount}</strong> {pluralize(cartItemsCount, 'product')}</span>
 		{#if cartItemsCount}
