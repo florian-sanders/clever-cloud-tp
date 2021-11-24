@@ -66,12 +66,12 @@ h1, h2, h3, h4, h5, h6, p, ul, li {
 
 @supports selector(div:focus-visible) {
   /* mouse click / active focus */
-  .custom-button:focus:not(:focus-visible) {
+  *:focus:not(:focus-visible) {
     outline: none;
   }
 
   /* keyboard focus only */
-  .custom-button:focus-visible {
+  *:focus-visible {
     outline: var(--generic-outline);
     outline-offset: var(--generic-outline-offset);
   }
