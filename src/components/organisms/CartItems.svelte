@@ -14,7 +14,12 @@
 	import { cartItems } from '$stores';
 	import { pluralize } from '$utilities';
 
-	let removeAllItems = () => cartItems.update(() => []);
+	let itemCountElement: HTMLDivElement;
+
+	let removeAllItems = () => {
+		$cartItems = [];
+		itemCountElement?.focus();
+	};
 
 	/* necesary because cartItems is watched but its properties are not */
 	$: cartItemsCount = $cartItems.length;
@@ -22,7 +27,7 @@
 
 <GridColumnHeader>
 	<h2>View selected items in estimate</h2>
-	<p class="status">
+	<p class="status" bind:this={itemCountElement} tabindex="-1">
 		<span><strong>{cartItemsCount}</strong> {pluralize(cartItemsCount, 'product')}</span>
 		{#if cartItemsCount}
 			<SimpleButton skin="cautionary" action={removeAllItems}>Remove All</SimpleButton>
